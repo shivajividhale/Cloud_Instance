@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Input percentiles</title>
+</head>
+<body>
+<h5>
+	Asked for <%= @cores %> cores and <%= @memory %> memory
+</h5>
+<table border="5">
+	<tr> <h6>
+		<td>Provider</td>
+		<td>Instance type</td>
+		<td>Cores</td>
+		<td>Memory</td>
+		<td>Cost</td>
+	</h6></tr>
+
+	<% @best_instances.each do |ci|%>
+		<% next if ci.nil? %>
+		
+	<tr>
+		<td><%= ci.provider %></td>
+		<td><%= ci.instance_type %></td>
+		<td><%= ci.cores %></td>
+		<td><%= ci.memory %></td>
+		<td><%= ci.cost %></td>
+		
+	</tr>
+	<% end %>
+</table>
+</body>
+</html>

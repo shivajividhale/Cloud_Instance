@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Input percentiles</title>
+</head>
+<body>
+<h1><%= form_tag cloudinstances_path do %>
+
+	<%= text_field_tag :CPUUtil, nil, :placeholder => 'Enter CPU Utilization', :class => "username-field form-control", autofocus: true%>
+
+	<%= text_field_tag :MEMUtil, nil, :placeholder => 'Enter Memory Utilization', :class => "username-field form-control", autofocus: true%>
+	
+	<%= text_field_tag :clock_speed, nil, :placeholder => 'Enter clock speed', :class => "username-field form-control", autofocus: true%>
+
+	<div id="login-reg" class="container actions">
+		<%= submit_tag "Get cloud instance", id: "login-btn",:class => "btn btn-info" %>
+	</div>
+<% end %>
+
+</h1>
+</body>
+</html>
