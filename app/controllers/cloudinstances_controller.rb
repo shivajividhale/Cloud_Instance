@@ -9,6 +9,7 @@ class CloudinstancesController < ApplicationController
 		@providers.each do |cloud_provider|
 			@cores = params[:CPUUtil]
 			@memory = params[:MEMUtil]
+			@clock_speed = params[:clock_speed]
 			@instances = CloudInstance.where("cores >= ? AND memory >= ? AND provider = ?", params[:CPUUtil], params[:MEMUtil], cloud_provider)
 			@best_instances << get_instance(@instances,params[:CPUUtil], params[:MEMUtil], params[:clock_speed])
 		# @CloudInstance = CloudInstance.get_instance_AWS(params[:CPUUtil], params[:MEMUtil], params[:clock_speed])
@@ -51,7 +52,7 @@ private
 		end
 		instance_list.clear
 		result.each do |instance|
-			if instance.clock_speed > params[:clock_speed].to_f 
+			if instance.clock_speed >= params[:clock_speed].to_f 
 				if instance_list.length == 0
 					instance_list << instance 
 				elsif instance.clock_speed < instance_list[0].clock_speed
@@ -64,14 +65,18 @@ private
 		end
 		return instance_list[0] if instance_list.length == 1
 		if instance_list.length == 0
-			instance_list = instance_list.sort_by do 
+			instance_list = result.sort {|a,b| (a.clock_speed <=> b.clock_speed) == 0 ? (a.cost <=> b.cost) : (a.clock_speed <=> b.clock_speed) } 
+			
+			return instance_list.last
+
 		else
 			res = instance_list.sort_by do |item|
     			item[:cost]
-			end 
+    		end
+				res = res.reverse
+				return res[0]
+			 
 		end	
-		res = res.reverse
-		return res[0]
 	end	
 end
 

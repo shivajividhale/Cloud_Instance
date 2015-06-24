@@ -5,7 +5,7 @@
 </head>
 <body>
 <h5>
-	Asked for <%= @cores %> cores and <%= @memory %> memory
+	Asked for <%= @cores %> cores and <%= @memory %> memory and <%= @clock_speed %> clock speed
 </h5>
 <table border="5">
 	<tr> <h6>
@@ -13,6 +13,7 @@
 		<td>Instance type</td>
 		<td>Cores</td>
 		<td>Memory</td>
+		<td>Clock Speed
 		<td>Cost</td>
 	</h6></tr>
 
@@ -24,6 +25,7 @@
 		<td><%= ci.instance_type %></td>
 		<td><%= ci.cores %></td>
 		<td><%= ci.memory %></td>
+		<td><%= ci.clock_speed%></td>
 		<td><%= ci.cost %></td>
 		
 	</tr>
